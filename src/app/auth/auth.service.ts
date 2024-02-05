@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment.development';
 
 import { User } from './user.model';
 
@@ -21,9 +22,8 @@ export class AuthService {
   user = new BehaviorSubject<User>(null);
   private tokenExpirationTimer: any;
 
-  private webApiKey = 'AIzaSyDyaRq8vwFYeXfYoR9uruwCOFXYJmpkVBA';
-  private signUpUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${this.webApiKey}`;
-  private signInUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${this.webApiKey}`;
+  private signUpUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.firebaseAPIKey}`;
+  private signInUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.firebaseAPIKey}`;
 
   constructor(private http: HttpClient, private router: Router) {}
 
